@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const navItems = [
   { label: "Home", path: "/" },
   { label: "Workouts", path: "/app/workouts" },
-  { label: "Statistics", path: "/statistics" },
+  { label: "Statistics", path: "/app/statistics" },
 ];
 
 export const Header = () => {

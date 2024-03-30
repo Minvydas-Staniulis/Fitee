@@ -7,62 +7,107 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import TableActions from "../../../components/Table/TableActions";
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
-) {
-  return { name, calories, fat, carbs, protein };
+function createData(name: string, distance: number, time: number) {
+  return { name, distance, time };
 }
 
 const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Morning run", 3, 15),
+  createData("Run", 7, 43),
+  createData("Run", 1, 17),
+  createData("Run", 4, 59),
+  createData("First run", 1, 12),
 ];
 
-export default function Workouts() {
+const Workouts = () => {
+  const [tabValue, setTabValue] = React.useState(0);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleView = (name: string) => {
+    alert(`Viewing details of ${name}`);
+    handleMenuClose();
+  };
+
+  const handleDelete = (name: string) => {
+    alert(`Deleting entry ${name}`);
+    handleMenuClose();
+  };
+
   return (
     <div className="p-4">
-      {" "}
-      {/* Apply padding of 1rem (16px) to all sides */}
       <div className="flex justify-end mb-4">
         <Button variant="contained">Add New</Button>
       </div>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.name}
-                </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+      <Tabs value={tabValue} onChange={handleChange} centered>
+        <Tab label="Running" />
+        <Tab label="Exercises" />
+      </Tabs>
+      {tabValue === 0 && (
+        <TableContainer component={Paper}>
+          <Table aria-label="running table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Distance&nbsp;(km)</TableCell>
+                <TableCell>Time</TableCell>
+                <TableCell>Pace&nbsp;(min/km)</TableCell>
+                <TableCell align="right">Actions</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell>{row.distance}</TableCell>
+                  <TableCell>{row.time}</TableCell>
+                  <TableCell>
+                    {row.distance !== 0
+                      ? (row.time / row.distance).toFixed(2)
+                      : "N/A"}
+                  </TableCell>
+                  <TableCell align="right">
+                    <TableActions
+                      rowName={row.name}
+                      handleView={handleView}
+                      handleDelete={handleDelete}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
+      {tabValue === 1 && (
+        <div>
+          <p>This is the content for the "Exercises" tab.</p>
+        </div>
+      )}
     </div>
   );
-}
+};
+
+export default Workouts;
