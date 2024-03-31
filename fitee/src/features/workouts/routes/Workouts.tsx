@@ -9,46 +9,52 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import IconButton from "@mui/material/IconButton";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
+import axios from "axios";
+import { convertTimeToMinutes } from "../../../utils/calculations/timeToMinutes";
 import TableActions from "../../../components/Table/TableActions";
 
-function createData(name: string, distance: number, time: number) {
-  return { name, distance, time };
+interface Running {
+  id: number;
+  name: string;
+  distance: number;
+  running_time: string;
+  pace?: number;
 }
-
-const rows = [
-  createData("Morning run", 3, 15),
-  createData("Run", 7, 43),
-  createData("Run", 1, 17),
-  createData("Run", 4, 59),
-  createData("First run", 1, 12),
-];
 
 const Workouts = () => {
   const [tabValue, setTabValue] = React.useState(0);
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [runnings, setRunnings] = React.useState<Running[]>([]);
+
+  React.useEffect(() => {
+    axios
+      .get("http://localhost:5015/api/RunningApi/GetRunnings")
+      .then((response) => {
+        const convertedRunnings = response.data.responseData.map(
+          (running: Running) => ({
+            ...running,
+            pace:
+              running.distance !== 0
+                ? convertTimeToMinutes(running.running_time) / running.distance
+                : 0,
+          })
+        );
+        setRunnings(convertedRunnings);
+      })
+      .catch((error) => {
+        console.error("Error fetching runnings:", error);
+      });
+  }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
   const handleView = (name: string) => {
     alert(`Viewing details of ${name}`);
-    handleMenuClose();
   };
 
   const handleDelete = (name: string) => {
     alert(`Deleting entry ${name}`);
-    handleMenuClose();
   };
 
   return (
@@ -73,26 +79,24 @@ const Workouts = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
+              {runnings.map((running) => (
                 <TableRow
-                  key={row.name}
+                  key={running.id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {running.name}
                   </TableCell>
-                  <TableCell>{row.distance}</TableCell>
-                  <TableCell>{row.time}</TableCell>
+                  <TableCell>{running.distance}</TableCell>
+                  <TableCell>{running.running_time}</TableCell>
                   <TableCell>
-                    {row.distance !== 0
-                      ? (row.time / row.distance).toFixed(2)
-                      : "N/A"}
+                    {running.pace !== 0 ? running.pace?.toFixed(2) : "N/A"}
                   </TableCell>
                   <TableCell align="right">
                     <TableActions
-                      rowName={row.name}
-                      handleView={handleView}
-                      handleDelete={handleDelete}
+                      rowName={running.name}
+                      handleView={() => handleView(running.name)}
+                      handleDelete={() => handleDelete(running.name)}
                     />
                   </TableCell>
                 </TableRow>
