@@ -25,7 +25,7 @@ const Workouts = () => {
   const [tabValue, setTabValue] = React.useState(0);
   const [runnings, setRunnings] = React.useState<Running[]>([]);
 
-  React.useEffect(() => {
+  const fetchRunnings = () => {
     axios
       .get("http://localhost:5015/api/RunningApi/GetRunnings")
       .then((response) => {
@@ -43,6 +43,10 @@ const Workouts = () => {
       .catch((error) => {
         console.error("Error fetching runnings:", error);
       });
+  };
+
+  React.useEffect(() => {
+    fetchRunnings();
   }, []);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -53,8 +57,16 @@ const Workouts = () => {
     alert(`Viewing details of ${name}`);
   };
 
-  const handleDelete = (name: string) => {
-    alert(`Deleting entry ${name}`);
+  const handleDelete = (id: number) => {
+    axios
+      .delete(`http://localhost:5015/api/RunningApi/DeleteRunning/${id}`)
+      .then((response) => {
+        alert(`Deleted ${id}`);
+        fetchRunnings();
+      })
+      .catch((error) => {
+        alert(`Error: ${error}`);
+      });
   };
 
   return (
@@ -96,7 +108,7 @@ const Workouts = () => {
                     <TableActions
                       rowName={running.name}
                       handleView={() => handleView(running.name)}
-                      handleDelete={() => handleDelete(running.name)}
+                      handleDelete={() => handleDelete(running.id)}
                     />
                   </TableCell>
                 </TableRow>
