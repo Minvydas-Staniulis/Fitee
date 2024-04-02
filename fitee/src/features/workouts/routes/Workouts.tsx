@@ -10,7 +10,6 @@ import Button from "@mui/material/Button";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import axios from "axios";
-import { convertTimeToMinutes } from "../../../utils/calculations/timeToMinutes";
 import TableActions from "../../../components/Table/TableActions";
 
 interface Running {
@@ -29,16 +28,8 @@ const Workouts = () => {
     axios
       .get("http://localhost:5015/api/RunningApi/GetRunnings")
       .then((response) => {
-        const convertedRunnings = response.data.responseData.map(
-          (running: Running) => ({
-            ...running,
-            pace:
-              running.distance !== 0
-                ? convertTimeToMinutes(running.running_time) / running.distance
-                : 0,
-          })
-        );
-        setRunnings(convertedRunnings);
+        console.log(response.data.responseData);
+        setRunnings(response.data.responseData);
       })
       .catch((error) => {
         console.error("Error fetching runnings:", error);
@@ -101,9 +92,7 @@ const Workouts = () => {
                   </TableCell>
                   <TableCell>{running.distance}</TableCell>
                   <TableCell>{running.running_time}</TableCell>
-                  <TableCell>
-                    {running.pace !== 0 ? running.pace?.toFixed(2) : "N/A"}
-                  </TableCell>
+                  <TableCell>{running.pace}</TableCell>
                   <TableCell align="right">
                     <TableActions
                       rowName={running.name}

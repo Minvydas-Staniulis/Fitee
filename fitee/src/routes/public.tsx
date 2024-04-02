@@ -29,4 +29,5 @@ export const publicRoutes = [
       { path: "*", element: <Navigate to="." /> },
     ],
   },
+  { path: "/", element: <Navigate to="/app" /> },
 ];
