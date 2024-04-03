@@ -3,6 +3,7 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Tooltip from "@mui/material/Tooltip";
 
 interface TableActionsProps {
   rowName: string;
@@ -42,7 +43,14 @@ const TableActions = ({
         open={open}
         onClose={handleMenuClose}
       >
-        <MenuItem onClick={() => handleView(rowName)}>View</MenuItem>
+        <Tooltip title="View Is Currently Disabled">
+          <span>
+            <MenuItem disabled onClick={() => handleView(rowName)}>
+              View
+            </MenuItem>
+          </span>
+        </Tooltip>
+
         <MenuItem onClick={() => handleDelete(rowName)}>Delete</MenuItem>
       </Menu>
     </>

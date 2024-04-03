@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Runnings } from "../components/Runnings";
+import { Exercises } from "../components/Exercises";
 
 interface Running {
   id: number;
@@ -22,7 +23,9 @@ const Workouts = () => {
   return (
     <div className="p-4">
       <div className="flex justify-end mb-4">
-        <Button variant="contained">Add New</Button>
+        <Button variant="contained">
+          Add {tabValue === 0 ? "Run" : "Exercise"}
+        </Button>
       </div>
       <Tabs value={tabValue} onChange={handleChange} centered>
         <Tab label="Running" />
@@ -31,7 +34,7 @@ const Workouts = () => {
       {tabValue === 0 && <Runnings />}
       {tabValue === 1 && (
         <div>
-          <p>This is the content for the "Exercises" tab.</p>
+          <Exercises />
         </div>
       )}
     </div>
