@@ -5,14 +5,6 @@ import Tab from "@mui/material/Tab";
 import { Runnings } from "../components/Runnings";
 import { Exercises } from "../components/Exercises";
 
-interface Running {
-  id: number;
-  name: string;
-  distance: number;
-  running_time: string;
-  pace: number;
-}
-
 const Workouts = () => {
   const [tabValue, setTabValue] = React.useState(0);
 
