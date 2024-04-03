@@ -4,9 +4,22 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Runnings } from "../components/Runnings";
 import { Exercises } from "../components/Exercises";
+import { RunDialog } from "../components/RunDialog";
+import { ExerciseDialog } from "../components/ExerciseDialog";
 
 const Workouts = () => {
   const [tabValue, setTabValue] = React.useState(0);
+  const [openRun, setOpenRun] = React.useState(false);
+  const [openExercise, setOpenExercise] = React.useState(false);
+
+  const handleClickOpen = () => {
+    tabValue === 0 ? setOpenRun(true) : setOpenExercise(true);
+  };
+
+  const handleClose = () => {
+    setOpenRun(false);
+    setOpenExercise(false);
+  };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -15,7 +28,7 @@ const Workouts = () => {
   return (
     <div className="p-4">
       <div className="flex justify-end mb-4">
-        <Button variant="contained">
+        <Button variant="contained" onClick={handleClickOpen}>
           Add {tabValue === 0 ? "Run" : "Exercise"}
         </Button>
       </div>
@@ -29,6 +42,8 @@ const Workouts = () => {
           <Exercises />
         </div>
       )}
+      <RunDialog open={openRun} handleClose={handleClose} />
+      <ExerciseDialog open={openExercise} handleClose={handleClose} />
     </div>
   );
 };
