@@ -20,7 +20,7 @@ export const Home: React.FC<HomeProps> = ({ backgroundImage }) => {
         backgroundSize: "cover",
       }}
     >
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center pt-10">
         <Card className="w-2/3" sx={{ borderRadius: "5%" }}>
           <div className="grid grid-cols-3 gap-1">
             <CardContent className="bg-[#E27D60] col-span-3 md:col-span-1">
