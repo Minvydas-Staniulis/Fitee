@@ -1,10 +1,9 @@
 import React from "react";
+import { BackgroundImageProps } from "../../../types";
 
-interface NutritionProps {
-  backgroundImage: string;
-}
-
-export const Nutrition: React.FC<NutritionProps> = ({ backgroundImage }) => {
+export const Nutrition: React.FC<BackgroundImageProps> = ({
+  backgroundImage,
+}) => {
   return (
     <div
       className="flex flex-col h-screen"

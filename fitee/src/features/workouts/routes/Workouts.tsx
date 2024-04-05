@@ -6,12 +6,11 @@ import { Runnings } from "../components/Runnings";
 import { Exercises } from "../components/Exercises";
 import { RunDialog } from "../components/RunDialog";
 import { ExerciseDialog } from "../components/ExerciseDialog";
+import { BackgroundImageProps } from "../../../types";
 
-interface WorkoutsProps {
-  backgroundImage: string;
-}
-
-export const Workouts: React.FC<WorkoutsProps> = ({ backgroundImage }) => {
+export const Workouts: React.FC<BackgroundImageProps> = ({
+  backgroundImage,
+}) => {
   const [tabValue, setTabValue] = React.useState(0);
   const [openRun, setOpenRun] = React.useState(false);
   const [openExercise, setOpenExercise] = React.useState(false);
