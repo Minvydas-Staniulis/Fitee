@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Menu from "@mui/material/Menu";
+import TablePagination from "@mui/material/TablePagination";
 
 interface Running {
   id: number;
@@ -25,8 +26,21 @@ export const Runnings = () => {
   const [runnings, setRunnings] = React.useState<Running[]>([]);
   const [filterName, setFilterName] = React.useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const open = Boolean(anchorEl);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -110,28 +124,39 @@ export const Runnings = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {runnings.map((running) => (
-              <TableRow
-                key={running.id}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {running.name}
-                </TableCell>
-                <TableCell>{running.distance}</TableCell>
-                <TableCell>{running.running_time}</TableCell>
-                <TableCell>{running.pace}</TableCell>
-                <TableCell align="right">
-                  <TableActions
-                    rowName={running.name}
-                    handleView={() => handleView(running.name)}
-                    handleDelete={() => handleDelete(running.id)}
-                  />
-                </TableCell>
-              </TableRow>
-            ))}
+            {runnings
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((running) => (
+                <TableRow
+                  key={running.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {running.name}
+                  </TableCell>
+                  <TableCell>{running.distance}</TableCell>
+                  <TableCell>{running.running_time}</TableCell>
+                  <TableCell>{running.pace}</TableCell>
+                  <TableCell align="right">
+                    <TableActions
+                      rowName={running.name}
+                      handleView={() => handleView(running.name)}
+                      handleDelete={() => handleDelete(running.id)}
+                    />
+                  </TableCell>
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={runnings.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </TableContainer>
     </div>
   );
