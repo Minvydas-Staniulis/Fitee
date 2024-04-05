@@ -21,9 +21,9 @@ export const Home: React.FC<HomeProps> = ({ backgroundImage }) => {
       }}
     >
       <div className="flex items-center justify-center pt-10">
-        <Card className="w-2/3" sx={{ borderRadius: "5%" }}>
-          <div className="grid grid-cols-3 gap-1">
-            <CardContent className="bg-[#E27D60] col-span-3 md:col-span-1">
+        <Card className="w-2/3" sx={{ borderRadius: "10px" }}>
+          <div className="grid grid-cols-3">
+            <CardContent className="bg-[#c2a5f9] col-span-3 md:col-span-1">
               <div className="flex flex-row gap-10">
                 <div className="flex flex-col gap-3">
                   <Typography variant="h5">TRACK YOUR STATS</Typography>
@@ -39,9 +39,9 @@ export const Home: React.FC<HomeProps> = ({ backgroundImage }) => {
               </div>
             </CardContent>
 
-            <CardContent className="bg-[#E8A87C] col-span-3 md:col-span-1">
+            <CardContent className="bg-[#ffd8ea] col-span-3 md:col-span-1">
               <div className="flex flex-row gap-10">
-                <div className="flex flex-col gap-3">
+                <div className="flex flex-col gap-3 text-black">
                   <Typography variant="h5">ADD YOUR PROGRESS</Typography>
                   <Typography variant="body2">
                     The distance you ran, exercise you did, weights you used -
@@ -49,12 +49,12 @@ export const Home: React.FC<HomeProps> = ({ backgroundImage }) => {
                   </Typography>
                 </div>
                 <div className="flex">
-                  <BenchPressIcon className="w-[150px] h-[150px]" />
+                  <BenchPressIcon className="w-[150px] h-[150px] stroke-[#000000]" />
                 </div>
               </div>
             </CardContent>
 
-            <CardContent className="bg-[#C38D9E] col-span-3 md:col-span-1">
+            <CardContent className="bg-[#2d67f8] col-span-3 md:col-span-1">
               <div className="flex flex-row gap-10">
                 <div className="flex flex-col gap-3">
                   <Typography variant="h5">TRACK YOUR NUTRITION</Typography>

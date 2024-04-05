@@ -9,6 +9,7 @@ const navItems = [
   { label: "Home", path: "/app/home" },
   { label: "Workouts", path: "/app/workouts" },
   { label: "Statistics", path: "/app/statistics" },
+  { label: "Nutrition", path: "/app/nutrition" },
 ];
 
 export const Header = () => {

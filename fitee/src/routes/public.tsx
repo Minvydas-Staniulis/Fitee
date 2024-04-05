@@ -5,7 +5,12 @@ import Workouts from "../features/workouts/routes/Workouts";
 import { MainLayout } from "../components/Layout/MainLayout";
 import Statistics from "../features/statistics/routes/Statistics";
 import { Home } from "../features/home/routes/Home";
-import { weightLiftingMeditationImage } from "../assets/images";
+import {
+  foodieImage,
+  runningImage,
+  weightLiftingMeditationImage,
+} from "../assets/images";
+import { Nutrition } from "../features/nutrition/routes/Nutrition";
 
 const App = () => {
   return (
@@ -30,8 +35,15 @@ export const publicRoutes = [
         path: "home",
         element: <Home backgroundImage={weightLiftingMeditationImage} />,
       },
-      { path: "workouts", element: <Workouts /> },
+      {
+        path: "workouts",
+        element: <Workouts backgroundImage={runningImage} />,
+      },
       { path: "statistics", element: <Statistics /> },
+      {
+        path: "Nutrition",
+        element: <Nutrition backgroundImage={foodieImage} />,
+      },
       { path: "*", element: <Navigate to="." /> },
     ],
   },
