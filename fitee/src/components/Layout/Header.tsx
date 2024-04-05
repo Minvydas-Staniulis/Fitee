@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 const navItems = [
-  { label: "Home", path: "/" },
+  { label: "Home", path: "/app/home" },
   { label: "Workouts", path: "/app/workouts" },
   { label: "Statistics", path: "/app/statistics" },
 ];
