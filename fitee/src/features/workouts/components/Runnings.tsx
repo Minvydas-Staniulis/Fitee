@@ -6,25 +6,17 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import TableActions from "../../../components/Table/TableActions";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Menu from "@mui/material/Menu";
 import TablePagination from "@mui/material/TablePagination";
-
-interface Running {
-  id: number;
-  name: string;
-  distance: number;
-  running_time: string;
-  pace: number;
-}
+import { useRunnings } from "../../../hooks/useRunnings";
 
 export const Runnings = () => {
-  const [runnings, setRunnings] = React.useState<Running[]>([]);
-  const [filterName, setFilterName] = React.useState<string>("");
+  const { runnings, deleteRunning } = useRunnings();
+  const [localFilterName, setLocalFilterName] = React.useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -50,37 +42,12 @@ export const Runnings = () => {
     setAnchorEl(null);
   };
 
-  const fetchRunnings = () => {
-    axios
-      .get(
-        `http://localhost:5015/api/RunningApi/GetRunnings?name=${filterName}`
-      )
-      .then((response) => {
-        setRunnings(response.data.responseData);
-      })
-      .catch((error) => {
-        console.error("Error fetching runnings:", error);
-      });
-  };
-
-  React.useEffect(() => {
-    fetchRunnings();
-  }, [filterName]);
-
   const handleView = (name: string) => {
     alert(`Viewing details of ${name}`);
   };
 
   const handleDelete = (id: number) => {
-    axios
-      .delete(`http://localhost:5015/api/RunningApi/DeleteRunning/${id}`)
-      .then((response) => {
-        alert(`Deleted ${id}`);
-        fetchRunnings();
-      })
-      .catch((error) => {
-        alert(`Error: ${error}`);
-      });
+    deleteRunning(id);
   };
 
   return (
@@ -110,9 +77,9 @@ export const Runnings = () => {
                 >
                   <TextField
                     label="Filter by name"
-                    value={filterName}
+                    value={localFilterName}
                     onChange={(e) => {
-                      setFilterName(e.target.value);
+                      setLocalFilterName(e.target.value);
                     }}
                   />
                 </Menu>
