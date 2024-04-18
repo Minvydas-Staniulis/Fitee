@@ -6,11 +6,8 @@ import { Runnings } from "../components/Runnings";
 import { Exercises } from "../components/Exercises";
 import { RunDialog } from "../components/RunDialog";
 import { ExerciseDialog } from "../components/ExerciseDialog";
-import { BackgroundImageProps } from "../../../types";
 
-export const Workouts: React.FC<BackgroundImageProps> = ({
-  backgroundImage,
-}) => {
+export const Workouts = () => {
   const [tabValue, setTabValue] = React.useState(0);
   const [openRun, setOpenRun] = React.useState(false);
   const [openExercise, setOpenExercise] = React.useState(false);
@@ -29,13 +26,7 @@ export const Workouts: React.FC<BackgroundImageProps> = ({
   };
 
   return (
-    <div
-      className="flex flex-col h-screen p-4"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-      }}
-    >
+    <div className="flex flex-col h-screen p-4">
       <div className="flex justify-end mb-4">
         <Button variant="contained" onClick={handleClickOpen}>
           Add {tabValue === 0 ? "Run" : "Exercise"}

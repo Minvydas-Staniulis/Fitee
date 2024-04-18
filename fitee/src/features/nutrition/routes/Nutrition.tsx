@@ -1,17 +1,8 @@
 import React from "react";
-import { BackgroundImageProps } from "../../../types";
 
-export const Nutrition: React.FC<BackgroundImageProps> = ({
-  backgroundImage,
-}) => {
+export const Nutrition = () => {
   return (
-    <div
-      className="flex flex-col h-screen"
-      style={{
-        backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: "cover",
-      }}
-    >
+    <div className="flex flex-col h-screen">
       <p>aa</p>
     </div>
   );

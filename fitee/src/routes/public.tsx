@@ -5,11 +5,7 @@ import Workouts from "../features/workouts/routes/Workouts";
 import { MainLayout } from "../components/Layout/MainLayout";
 import Statistics from "../features/statistics/routes/Statistics";
 import { Home } from "../features/home/routes/Home";
-import {
-  foodieImage,
-  runningImage,
-  weightLiftingMeditationImage,
-} from "../assets/images";
+import { runningImage, weightLiftingMeditationImage } from "../assets/images";
 import { Nutrition } from "../features/nutrition/routes/Nutrition";
 
 const App = () => {
@@ -33,16 +29,16 @@ export const publicRoutes = [
     children: [
       {
         path: "home",
-        element: <Home backgroundImage={weightLiftingMeditationImage} />,
+        element: <Home />,
       },
       {
         path: "workouts",
-        element: <Workouts backgroundImage={runningImage} />,
+        element: <Workouts />,
       },
       { path: "statistics", element: <Statistics /> },
       {
         path: "Nutrition",
-        element: <Nutrition backgroundImage={foodieImage} />,
+        element: <Nutrition />,
       },
       { path: "*", element: <Navigate to="." /> },
     ],
