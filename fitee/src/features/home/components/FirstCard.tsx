@@ -4,22 +4,18 @@ import { StatisticsIcon } from "../../../assets/svg";
 
 export const FirstCard = () => {
   return (
-    <>
-      <CardContent className="bg-[#c2a5f9] col-span-3 md:col-span-1">
-        <div className="flex flex-row gap-10">
-          <div className="flex flex-col gap-3">
-            <Typography variant="h5">TRACK YOUR STATS</Typography>
-            <Typography variant="body2">
-              Add your workouts, exercises - track your performance, personal
-              records. It helps you to see your achievements and how you
-              constantly improve!
-            </Typography>
-          </div>
-          <div className="flex">
-            <StatisticsIcon className="w-[150px] h-[150px]" />
-          </div>
-        </div>
-      </CardContent>
-    </>
+    <CardContent className="bg-[#279674] rounded-lg shadow-lg p-6 flex flex-col items-center justify-center">
+      <StatisticsIcon className="w-24 h-24 text-white mb-4" />
+      <div className="flex flex-col gap-3 text-white text-center">
+        <Typography variant="h4" className="font-semibold">
+          TRACK YOUR STATS
+        </Typography>
+        <Typography variant="body1">
+          Add your workouts, exercises, track your performance, personal
+          records. It helps you see your achievements and how you constantly
+          improve!
+        </Typography>
+      </div>
+    </CardContent>
   );
 };
