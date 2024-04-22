@@ -6,13 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import TableActions from "../../../components/Table/TableActions";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Menu from "@mui/material/Menu";
 import TablePagination from "@mui/material/TablePagination";
-import { useRunnings } from "../../../hooks/useRunnings";
+import { useRunnings } from "hooks/useRunnings";
+import TableActions from "components/Table/TableActions";
 
 export const Runnings = () => {
   const { runnings, deleteRunning } = useRunnings();

@@ -5,8 +5,8 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import Button from "@mui/material/Button";
-import { useRunnings } from "../../../hooks/useRunnings";
-import { NewRunning } from "../../../types";
+import { useRunnings } from "hooks/useRunnings";
+import { NewRunning } from "types";
 
 interface RunDialogProps {
   open: boolean;
@@ -101,7 +101,7 @@ export const RunDialog: React.FC<RunDialogProps> = ({ open, handleClose }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose}>Cancel</Button>
-        <Button type="submit" onClick={handleAdd}>
+        <Button type="submit" onClick={handleAdd} disabled={hasError}>
           Add
         </Button>
       </DialogActions>

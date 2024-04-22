@@ -1,6 +1,6 @@
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { BenchPressIcon } from "../../../../assets/svg";
+import { BenchPressIcon } from "assets/svg";
 
 export const SecondCard = () => {
   return (

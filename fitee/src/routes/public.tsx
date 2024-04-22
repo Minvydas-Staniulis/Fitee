@@ -1,12 +1,11 @@
 import { Suspense } from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-import Workouts from "../features/workouts/routes/Workouts";
-import { MainLayout } from "../components/Layout/MainLayout";
-import Statistics from "../features/statistics/routes/Statistics";
-import { Home } from "../features/home/routes/Home";
-import { runningImage, weightLiftingMeditationImage } from "../assets/images";
-import { Nutrition } from "../features/nutrition/routes/Nutrition";
+import { Nutrition } from "features/nutrition/routes/Nutrition";
+import { Home } from "features/home/routes/Home";
+import Statistics from "features/statistics/routes/Statistics";
+import { MainLayout } from "components/Layout/MainLayout";
+import Workouts from "features/workouts/routes/Workouts";
 
 const App = () => {
   return (
@@ -40,8 +39,8 @@ export const publicRoutes = [
         path: "Nutrition",
         element: <Nutrition />,
       },
-      { path: "*", element: <Navigate to="." /> },
+      { path: "*", element: <Navigate to="/app/home" /> },
     ],
   },
-  { path: "/", element: <Navigate to="/app" /> },
+  { path: "/", element: <Navigate to="/app/home" /> },
 ];

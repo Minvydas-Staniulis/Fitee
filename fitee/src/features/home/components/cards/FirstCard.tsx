@@ -1,6 +1,6 @@
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { StatisticsIcon } from "../../../../assets/svg";
+import { StatisticsIcon } from "assets/svg";
 
 export const FirstCard = () => {
   return (

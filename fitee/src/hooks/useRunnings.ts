@@ -1,6 +1,6 @@
 import React from "react";
-import { Running } from "../types";
 import axios from "axios";
+import { Running } from "types";
 
 type NewRunning = {
   name: string;

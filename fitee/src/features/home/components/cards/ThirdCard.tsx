@@ -1,6 +1,6 @@
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { NutritionIcon } from "../../../../assets/svg";
+import { NutritionIcon } from "assets/svg";
 
 export const ThirdCard = () => {
   return (

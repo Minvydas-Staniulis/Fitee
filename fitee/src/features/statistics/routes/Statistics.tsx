@@ -1,4 +1,4 @@
-import { useTotalDistance } from "../../../hooks/useTotalDistance";
+import { useTotalDistance } from "hooks/useTotalDistance";
 
 export default function Workouts() {
   const totalDistance = useTotalDistance();
