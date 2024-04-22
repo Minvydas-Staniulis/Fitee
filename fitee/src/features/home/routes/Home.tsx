@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@mui/material";
-import { FirstCard } from "../components/FirstCard";
-import { SecondCard } from "../components/SecondCard";
-import { ThirdCard } from "../components/ThirdCard";
+import { FirstCard } from "../components/cards/FirstCard";
+import { SecondCard } from "../components/cards/SecondCard";
+import { ThirdCard } from "../components/cards/ThirdCard";
 
 export const Home = () => {
   return (
